@@ -1,8 +1,8 @@
 // Khiem Nguyen - CIS 658
-// File's Purpose - Creates and exports the squares component for the project. Written in JSX.
+// File's Purpose - Creates and exports a game board (Board) component containing 3x3 sets of buttons for the project. Written in JSX.
 // Date - 2023/31/03
 
-export default function Square() {
+export default function Board() {
 
   return (
     <>
