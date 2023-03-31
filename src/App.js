@@ -3,8 +3,8 @@
 // the project. The board component will render the Square component. Written in JSX.
 // Date - 2023/31/03
 
-function Square() {
-  return <button className="square">1</button>;
+function Square({value}) {
+  return <button className="square">{value}</button>;
 }
 
 export default function Board() {
