@@ -3,16 +3,17 @@
 // the project. The board component will render the Square component. Written in JSX.
 // Date - 2023/31/03
 import { useState } from 'react';
-  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faO, faX } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faO, faX } from '@fortawesome/free-solid-svg-icons';
+  
 
 function Square({ value, onSquareClick }) {
   // Note: If desired, replace FontAwesomeIcon w/ Img Elements
   if (value === "X") {
-      return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faX} /></button>;
+    return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faX} color="blue" /></button>;
   }
   else if (value === "O") {
-      return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faO} /></button>;
+    return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faO} color="red"/></button>;
   }
   else {
     return <button className="square" onClick={onSquareClick}>{value}</button>;
