@@ -85,9 +85,17 @@ export default function Game() {
 
   function handlePlay(nextSquares) {
 
-    // Creates a new array with the previous history array set, adds new square elements (see tutorial)
+    // Creates a new array with the previous history array from the first index to the index of the selected move, 
+    // and adds new square elements. (see tutorial)
     // Alternative Explanation: https://www.samanthaming.com/tidbits/92-6-use-cases-of-spread-with-array/
-    setHistory([...history, nextSquares]); 
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+
+    // Update and set the History array latest history collection.
+    setHistory(nextHistory); 
+
+    // Update and set the current move to match the index of the nextHistory array's last element or latest point in history,
+    // every time a move is made
+    setCurrentMove(nextHistory.length - 1);
 
     // Update and set a xIsNext state
     setXIsNext(!xIsNext);
