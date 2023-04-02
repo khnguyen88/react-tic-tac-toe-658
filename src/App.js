@@ -83,7 +83,13 @@ export default function Game() {
   const currentSquares = history[history.length - 1];
 
   function handlePlay(nextSquares) {
-    // TODO
+
+    // Creates a new array with the previous history array set, adds new square elements (see tutorial)
+    // Alternative Explanation: https://www.samanthaming.com/tidbits/92-6-use-cases-of-spread-with-array/
+    setHistory([...history, nextSquares]); 
+
+    // Update and set a xIsNext state
+    setXIsNext(!xIsNext);
   }
 
   return (
