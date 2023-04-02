@@ -92,6 +92,28 @@ export default function Game() {
     setXIsNext(!xIsNext);
   }
 
+  function jumpTo(nextMove) {
+    //TO DO
+  }
+
+  const moves = history.map((squares, move) => { 
+    let description;
+    if (move > 0) {
+      description = 'Go to move #' + move;
+    }
+    else {
+      description = 'Go to start game';
+    }
+    return (
+      // Placeholder key prop required for each child in an array or iterator
+      <li key={move}>
+        <button onClick={()=> jumpTo(move)}>
+          {description}
+        </button>
+      </li>
+    );
+  });
+
   return (
     <div className="game">
       <div className="game-board">
@@ -99,7 +121,8 @@ export default function Game() {
       </div>
       <div className="game-info">
         <ol>
-          {/* TODO */}
+          {/* Takes an array of JSX element and renders it as a collection of item */}
+          {moves}
         </ol>
       </div>
     </div>
