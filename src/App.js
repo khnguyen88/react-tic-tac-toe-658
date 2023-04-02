@@ -10,7 +10,7 @@ import { faO, faX } from '@fortawesome/free-solid-svg-icons';
 function Square({ value, onSquareClick }) {
   // Note: If desired, replace FontAwesomeIcon w/ Img Elements
   if (value === "X") {
-    return <button className="square" onClick={onSquareClick(value)}><FontAwesomeIcon icon={faX} color="blue" /></button>;
+    return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faX} color="blue" /></button>;
   }
   else if (value === "O") {
     return <button className="square" onClick={onSquareClick}><FontAwesomeIcon icon={faO} color="red"/></button>;
@@ -54,15 +54,13 @@ export default function Board() {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
-
-
   return (
     <>
       
       <div>      
         <div className="status">{status}</div>
         <div className="board-row">
-          <Square value={squares[0]} onSquareClick={(value) => { handleClick(0); if(typeof value === "number"){alert(value)} }}/>
+          <Square value={squares[0]} onSquareClick={() => { handleClick(0) }}/>
           <Square value={squares[1]} onSquareClick={() => { handleClick(1) }}/>
           <Square value={squares[2]} onSquareClick={() => { handleClick(2) }}/>
         </div>
