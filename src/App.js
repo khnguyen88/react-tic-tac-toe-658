@@ -41,9 +41,26 @@ export default function Board() {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
+
+
+  // Figuring out how to set an array of n size.
+  // https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
+  let boardsize = 3;
+  let objects = Array.from(Array(boardsize).keys());
+
   return (
     <>
-      <div>
+      {/*  Figuring out how to generate loops in JSX
+      https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
+      <div className="board-row">
+          {
+            objects.map(function (object, i) {
+                return <Square value={squares[object]} key={i} onSquareClick={() => { handleClick(object) }} />;
+            })
+          }
+      </div>  
+      
+      <div>      
         <div className="status">{status}</div>
         <div className="board-row">
           <Square value={squares[0]} onSquareClick={() => { handleClick(0) }}/>
