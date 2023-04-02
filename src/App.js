@@ -43,38 +43,8 @@ export default function Board() {
 
 
 
-  // Figuring out how to set an array of n size.
-  // https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
-  // let boardsize = 3;
-  // let objects = Array.from({ length: boardsize }, (_, i) => i + 1);
-  // let set = Array.from(Array(boardsize * boardsize).keys());
-  // console.log(set);
-  // console.log(objects);
-
-
   return (
     <>
-      {/*  Figuring out how to generate loops in JSX
-      https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
-      {/* <div className="board-row">
-        {
-            objects.map(function (row, r) {
-              return (
-                <div className="board-row">
-                  {
-                    objects.map(function (col, c) {
-                      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
-                      // how to remove first element of an array and retrieve it's value
-                      // figured retrieve value of the first element multiple times and pop it at the end
-                      // BAD CAN'T SET THE value for
-                      return <Square value={squares[set[0]]} key={set.shift()}  onSquareClick={(key) => { handleClick(key) }} />;
-                    })
-                  }
-                </div>  
-              )
-            })
-          }
-      </div>   */}
       
       <div>      
         <div className="status">{status}</div>
