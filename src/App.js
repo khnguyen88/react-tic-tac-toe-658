@@ -139,6 +139,12 @@ export default function Game() {
           <button onClick={() => updateBoardSize(4)}>4x4</button>
           <button onClick={()=> updateBoardSize(5)}>5x5</button>
         </div>
+        <div>
+          {/* Resource references: */}
+          {/* https://medium.com/swlh/building-controlled-forms-using-functional-components-in-react-965d033a89bd */}
+          {/* https://stackoverflow.com/questions/18062069/why-does-valueasnumber-return-nan-as-a-value */}
+          <input name='rowColSize' type='number' value={rowColSize} onChange={e => { updateBoardSize(e.target.valueAsNumber);  }} />
+        </div>
         <br/>
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
