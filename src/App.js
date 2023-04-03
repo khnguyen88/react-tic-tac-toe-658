@@ -104,6 +104,7 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  // This function resets the currentMove state variable to 0, set the RowColSize
   function updateBoardSize(sizeOfRowCol) {
     setCurrentMove(0);
     setRowColSize(sizeOfRowCol);
@@ -131,21 +132,30 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
-        <div>
-          Select your board size:
+        <div className="dashboard">
+          <div>
+            Select your board size:
+          </div>
+          <div>
+            <button onClick={() => updateBoardSize(3)}>3x3</button>
+            <button onClick={() => updateBoardSize(4)}>4x4</button>
+            <button onClick={() => updateBoardSize(5)}>5x5</button>
+          </div>
+          <br/>
+          <div>
+            {/* Resource references: */}
+            {/* https://medium.com/swlh/building-controlled-forms-using-functional-components-in-react-965d033a89bd */}
+            {/* https://stackoverflow.com/questions/18062069/why-does-valueasnumber-return-nan-as-a-value */}
+            {/* https://aguidehub.com/blog/how-to-allow-only-numbers-in-input-field-react/ */}
+            <form>
+              <label class="label-text" for="rowColSize">Set Row & Col Size:</label><br/>
+              {/* Dynamic number input that binds it's values to rowColSize and checks to see if values entered in is numeric, if so call the updateBoardSize function and pass in the target value as a number, pass in current rowColSize value */}
+              <input name='rowColSize' pattern="[0-9]*" type='number' value={rowColSize} onChange={e => { updateBoardSize(e.target.validity.valid ? e.target.valueAsNumber : rowColSize);  }} />
+            </form>
+          </div>
+          <br />
         </div>
-        <div>
-          <button onClick={() => updateBoardSize(3)}>3x3</button>
-          <button onClick={() => updateBoardSize(4)}>4x4</button>
-          <button onClick={()=> updateBoardSize(5)}>5x5</button>
-        </div>
-        <div>
-          {/* Resource references: */}
-          {/* https://medium.com/swlh/building-controlled-forms-using-functional-components-in-react-965d033a89bd */}
-          {/* https://stackoverflow.com/questions/18062069/why-does-valueasnumber-return-nan-as-a-value */}
-          <input name='rowColSize' type='number' value={rowColSize} onChange={e => { updateBoardSize(e.target.valueAsNumber);  }} />
-        </div>
-        <br/>
+        
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
