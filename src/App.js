@@ -77,7 +77,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 export default function Game() {
-  const [rowColSize, setRowSize] = useState(5); // // Set the state of the initial row and column size, update as desired
+  const [rowColSize, setRowSize] = useState(3); // // Set the state of the initial row and column size, update as desired
   const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // The intial gameboard defined by the row and column size set by the player(s). To be passed into the initial history state
   const [history, setHistory] = useState([initialBoard]);
   const [currentMove, setCurrentMove] = useState(0);
@@ -179,6 +179,40 @@ function calculateWinner(squares) {
 
   // Check if values from each elements a column, for every column, matches
   // ------------------------------------------------------------------------
+    // We go through each column
+  for (let col = 0; col < squares.length; col++){
+
+    // We set a flag, we assume that each element in a column matches, until we find one that does not
+    let colCheck = true;
+
+    // We set a counter to track the number of valid matches in our comparsion
+    let numOfColMatches = 0;
+    // We go through each elements in a particular column
+    for (let row = 1; row < squares.length; row++){
+
+      // We check if the elements we are comparing are valid or not null
+      if (squares[row-1][col] && squares[row][col]) {
+
+        // If so, we compare the current element and adjacent element in each column
+        // If the two elements do not match, we change the flag to false indiciating the items along this column do not match
+        if (!(squares[row-1][col] === squares[row][col])) {
+          colCheck = false;
+        }
+
+        // Else increase our counter
+        else {
+          numOfColMatches++;
+        }
+
+        // If our flag is still valid after we performed set amount of comparsions, then we found a winner and return player who won
+        // The # of comparsions are # elements along a column minus one
+        if (colCheck && numOfColMatches === squares.length - 1) {
+          return squares[row][col];
+        }
+      }
+
+    }
+  }
 
 
   // Checks if values top-right to bottom-left diagonal elements matches, i.e. [0,0], [1,1], [2,2]
