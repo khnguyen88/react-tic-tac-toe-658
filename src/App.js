@@ -27,7 +27,9 @@ function Board({ xIsNext, squares, onPlay }) {
       return;
     }
 
-    const nextSquares = squares.slice();
+    // Perform a deep copy of the nested array; Initial program only did a shallow copy
+    // https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
+    const nextSquares = JSON.parse(JSON.stringify(squares));
 
     if (xIsNext) {
       nextSquares[row][col] = "X";
@@ -62,7 +64,7 @@ function Board({ xIsNext, squares, onPlay }) {
               <div className="board-row" key={rowIndex}>
                 {
                   nestedArray.map((cells, colIndex) => {
-                    return <Square key={colIndex} />
+                    return <Square key={colIndex} value={squares[rowIndex][colIndex]} onSquareClick={() => { handleClick(rowIndex, colIndex); console.log(rowIndex, " ", colIndex); }}/>
                   })
                 }
               </div>
