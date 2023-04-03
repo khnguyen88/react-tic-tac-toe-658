@@ -21,7 +21,10 @@ function Square({ value, onSquareClick }) {
 
 }
 
-function Board({xIsNext, squares, onPlay}) {
+function Board({ xIsNext, squares, onPlay }) {
+  
+  const rowColSize = 3; // 3x3
+  const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null));
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -52,6 +55,25 @@ function Board({xIsNext, squares, onPlay}) {
 
   return (
     <>
+      {/* Create a dynamic board template based on size */}
+      <div className="status">{status}</div>
+      {/*  Figuring out how to generate loops in JSX
+      https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
+      <div>
+        {
+          initialBoard.map((nestedArray, rowIndex) => {
+            return (
+              <div className="board-row" key={rowIndex}>
+                {
+                  nestedArray.map((cells, colIndex) => {
+                    return <Square key={colIndex} />
+                  })
+                }
+              </div>
+            );
+          })
+        }
+      </div>
       
       <div>      
         <div className="status">{status}</div>
@@ -78,6 +100,9 @@ function Board({xIsNext, squares, onPlay}) {
 }
 
 export default function Game() {
+  const rowColSize = 3; // 3x3
+  const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // To be passed into the initial history state
+  console.log(initialBoard);
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
