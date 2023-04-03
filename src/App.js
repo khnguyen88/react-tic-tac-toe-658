@@ -22,18 +22,18 @@ function Square({ value, onSquareClick }) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
-  function handleClick(i) {
-    if (squares[i] || calculateWinner(squares)) {
+  function handleClick(row, col) {
+    if (squares[row][col] || calculateWinner(squares)) {
       return;
     }
 
     const nextSquares = squares.slice();
 
     if (xIsNext) {
-      nextSquares[i] = "X";
+      nextSquares[row][col] = "X";
     }
     else {
-      nextSquares[i] = "O";
+      nextSquares[row][col] = "O";
     }
 
     onPlay(nextSquares);
