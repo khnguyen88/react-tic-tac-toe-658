@@ -77,7 +77,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 export default function Game() {
-  const [rowColSize, setRowSize] = useState(3); // // Set the state of the initial row and column size, update as desired
+  const [rowColSize, setRowColSize] = useState(3); // // Set the state of the initial row and column size, update as desired
   const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // The intial gameboard defined by the row and column size set by the player(s). To be passed into the initial history state
   const [history, setHistory] = useState([initialBoard]);
   const [currentMove, setCurrentMove] = useState(0);
@@ -104,6 +104,12 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  function updateBoardSize(sizeOfRowCol) {
+    setCurrentMove(0);
+    setRowColSize(sizeOfRowCol);
+    setHistory([Array(sizeOfRowCol).fill(Array(sizeOfRowCol).fill(null))]);
+  }
+
   const moves = history.map((squares, move) => { 
     let description;
     if (move > 0) {
@@ -125,6 +131,15 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
+        <div>
+          Select your board size:
+        </div>
+        <div>
+          <button onClick={() => updateBoardSize(3)}>3x3</button>
+          <button onClick={() => updateBoardSize(4)}>4x4</button>
+          <button onClick={()=> updateBoardSize(5)}>5x5</button>
+        </div>
+        <br/>
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
