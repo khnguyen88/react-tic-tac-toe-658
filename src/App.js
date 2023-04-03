@@ -64,7 +64,7 @@ function Board({ xIsNext, squares, onPlay }) {
               <div className="board-row" key={rowIndex}>
                 {
                   nestedArray.map((cells, colIndex) => {
-                    return <Square key={colIndex} value={squares[rowIndex][colIndex]} onSquareClick={() => { handleClick(rowIndex, colIndex); console.log(rowIndex, " ", colIndex); }}/>
+                    return <Square key={colIndex} value={squares[rowIndex][colIndex]} onSquareClick={() => { handleClick(rowIndex, colIndex) }}/>
                   })
                 }
               </div>
@@ -99,7 +99,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 export default function Game() {
-  const [rowColSize, setRowSize] = useState(3); // // Set the state of the initial row and column size, update as desired
+  const [rowColSize, setRowSize] = useState(5); // // Set the state of the initial row and column size, update as desired
   const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // The intial gameboard defined by the row and column size set by the player(s). To be passed into the initial history state
   const [history, setHistory] = useState([initialBoard]);
   const [currentMove, setCurrentMove] = useState(0);
@@ -170,6 +170,44 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
+  // Check if values from each elements a row, for every row, matches
+  for (let row = 0; row < squares.length; row++){
+    let isElementMatchInRow = true;
+    let matchingRow = false;
+    for (let col = 0; col < squares.length - 1; col++) {
+    
+    }
+  }
+
+  // Check if values from each elements a column, for every column, matches
+
+
+  // Checks if values top-right to bottom-left diagonal elements matches, i.e. [0,0], [1,1], [2,2]
+  let diagonalCheck = true;
+  for (let rowCol = 1; rowCol < squares.length; rowCol++){
+    if (!diagonalCheck || !(squares[rowCol - 1][rowCol - 1] === squares[rowCol][rowCol])) {
+      diagonalCheck = false;
+    }
+    if (diagonalCheck && rowCol === squares.length - 1) {
+      return squares[rowCol][rowCol];
+    }
+  }
+
+
+  // Checks if values bottom-right to top-left diagonal elements matches, i.e. [0,2], [1,1], [2,0]
+  // NEED TO RUN A FEW MORE CHECKS
+  diagonalCheck = true;
+  for (let row = 1, col = squares.length - 2; row < squares.length; row++, col--){
+    console.log("count", row-1, col+1, " compare with", row, col);
+    if (!diagonalCheck || !(squares[row - 1][col + 1] === squares[row][col])) {
+      diagonalCheck = false;
+    }
+    if (diagonalCheck && row === squares.length - 1) {
+      return squares[row][col];
+    }
+  }
+
 
   // COMMENT OUT FOR NOW TO PREVENT CODING ERROR
   // for (let i = 0; i < lines.length; i++){
