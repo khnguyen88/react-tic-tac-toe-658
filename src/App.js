@@ -138,51 +138,112 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
 
   // Check if values from each elements a row, for every row, matches
+  // ------------------------------------------------------------------------
+  // We go through each rows
   for (let row = 0; row < squares.length; row++){
-    let isElementMatchInRow = true;
-    let matchingRow = false;
-    for (let col = 0; col < squares.length - 1; col++) {
-    
+
+    // We set a flag, we assume that each element in a row matches, until we find one that does not
+    let rowCheck = true;
+
+    // We set a counter to track the number of valid matches in our comparsion
+    let numOfRowMatches = 0;
+    // We go through each elements in a particular row
+    for (let col = 1; col < squares.length; col++){
+
+      // We check if the elements we are comparing are valid or not null
+      if (squares[row][col - 1] && squares[row][col]) {
+
+        // If so, we compare the current element and adjacent element in each row
+        // If the two elements do not match, we change the flag to false indiciating the items along this row do not match
+        if (!(squares[row][col - 1] === squares[row][col])) {
+          rowCheck = false;
+        }
+
+        // Else increase our counter
+        else {
+          numOfRowMatches++;
+        }
+
+        // If our flag is still valid after we performed set amount of comparsions, then we found a winner and return player who won
+        // The # of comparsions are # elements along a row minus one
+        if (rowCheck && numOfRowMatches === squares.length - 1) {
+          return squares[row][col];
+        }
+      }
+
     }
   }
 
+
   // Check if values from each elements a column, for every column, matches
+  // ------------------------------------------------------------------------
 
 
   // Checks if values top-right to bottom-left diagonal elements matches, i.e. [0,0], [1,1], [2,2]
+  // ------------------------------------------------------------------------
+  // We set a flag, we assume that each element in a diagonal line matches, until we find one that does not
   let diagonalCheck = true;
+
+  // We set a counter to track the number of valid matches in our comparsion
+  let numOfDiagonalMatches = 0;
+  // We loop through the diagonal elements in the grid
   for (let rowCol = 1; rowCol < squares.length; rowCol++){
-    if (!diagonalCheck || !(squares[rowCol - 1][rowCol - 1] === squares[rowCol][rowCol])) {
-      diagonalCheck = false;
-    }
-    if (diagonalCheck && rowCol === squares.length - 1) {
-      return squares[rowCol][rowCol];
+    
+    // We check if the elements we are comparing are valid or not null
+    if (squares[rowCol - 1][rowCol - 1] && squares[rowCol][rowCol]) {
+
+      // If so, we compare the current element and adjacent element along the diagonal line
+      // If the two elements do not match, we change the flag to false indiciating the items along this diagonal line do not match
+      if (!(squares[rowCol - 1][rowCol - 1] === squares[rowCol][rowCol])) {
+        diagonalCheck = false;
+      }
+
+      // Else increase our counter
+      else {
+        numOfDiagonalMatches++;
+      }
+
+      // If our flag is still valid after we performed set amount of comparsions, then we found a winner and return player who won
+      // The # of comparsions are # elements along the diagonal line minus one
+      if (diagonalCheck && numOfDiagonalMatches === squares.length - 1) {
+        return squares[rowCol][rowCol];
+      }
     }
   }
 
 
   // Checks if values bottom-right to top-left diagonal elements matches, i.e. [0,2], [1,1], [2,0]
-  // NEED TO RUN A FEW MORE CHECKS
+  // ------------------------------------------------------------------------
+  // We set a flag, we assume that each element in a diagonal line matches, until we find one that does not
   diagonalCheck = true;
+
+  // We set a counter to track the number of valid matches in our comparsion
+  numOfDiagonalMatches = 0;
+
+  // We loop through the diagonal elements in the grid with two variables, one representing the row and column indices
+  // We set the row index at the "starting point" and we set the column index at the "ending point" and iterate through opposite direction
   for (let row = 1, col = squares.length - 2; row < squares.length; row++, col--){
-    console.log("count", row-1, col+1, " compare with", row, col);
-    if (!diagonalCheck || !(squares[row - 1][col + 1] === squares[row][col])) {
-      diagonalCheck = false;
-    }
-    if (diagonalCheck && row === squares.length - 1) {
-      return squares[row][col];
+    // We check if the elements we are comparing are valid or not null
+    if (squares[row - 1][col + 1] && squares[row][col]) {
+
+      // If so, we compare the current element and adjacent element along the diagonal line
+      // If the two elements do not match, we change the flag to false indiciating the items along this diagonal line do not match
+      if (!(squares[row - 1][col + 1] === squares[row][col])) {
+        diagonalCheck = false;
+      }
+
+      // Else increase our counter
+      else {
+        numOfDiagonalMatches++;
+      }
+
+      // If our flag is still valid after we performed set amount of comparsions, then we found a winner and return player who won
+      // The # of comparsions are # elements along the diagonal line minus one
+      if (diagonalCheck && numOfDiagonalMatches === squares.length - 1) {
+        return squares[row][col];
+      }
     }
   }
 
