@@ -22,10 +22,6 @@ function Square({ value, onSquareClick }) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
-  
-  const rowColSize = 3; // 3x3
-  const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null));
-
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
       return;
@@ -61,7 +57,7 @@ function Board({ xIsNext, squares, onPlay }) {
       https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
       <div>
         {
-          initialBoard.map((nestedArray, rowIndex) => {
+          squares.map((nestedArray, rowIndex) => {
             return (
               <div className="board-row" key={rowIndex}>
                 {
@@ -75,7 +71,8 @@ function Board({ xIsNext, squares, onPlay }) {
         }
       </div>
       
-      <div>      
+      {/* COMMENT OUT FOR NOW TO PREVENT CODING ERROR */}
+      {/* <div>      
         <div className="status">{status}</div>
         <div className="board-row">
           <Square value={squares[0]} onSquareClick={() => { handleClick(0) }}/>
@@ -94,16 +91,15 @@ function Board({ xIsNext, squares, onPlay }) {
           <Square value={squares[7]} onSquareClick={() => { handleClick(7) }}/>
           <Square value={squares[8]} onSquareClick={() => { handleClick(8) }}/>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
 
 export default function Game() {
-  const rowColSize = 3; // 3x3
-  const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // To be passed into the initial history state
-  console.log(initialBoard);
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [rowColSize, setRowSize] = useState(3); // // Set the state of the initial row and column size, update as desired
+  const initialBoard = Array(rowColSize).fill(Array(rowColSize).fill(null)); // The intial gameboard defined by the row and column size set by the player(s). To be passed into the initial history state
+  const [history, setHistory] = useState([initialBoard]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
   const xIsNext = currentMove % 2 === 0;
@@ -173,11 +169,12 @@ function calculateWinner(squares) {
     [2, 4, 6]
   ];
 
-  for (let i = 0; i < lines.length; i++){
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
+  // COMMENT OUT FOR NOW TO PREVENT CODING ERROR
+  // for (let i = 0; i < lines.length; i++){
+  //   const [a, b, c] = lines[i];
+  //   if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+  //     return squares[a];
+  //   }
+  // }
   return null;
 }
