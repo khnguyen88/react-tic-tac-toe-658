@@ -1,7 +1,19 @@
-// Khiem Nguyen - CIS 658
-// File's Purpose - Creates the Square and Board (gameboard) components. The Board component is composed of 3x3 sets of Squares component for 
-// the project. The board component will render the Square component. Written in JSX.
-// Date - 2023/31/03
+/*
+Khiem Nguyen - CIS 658
+Date - 2023/04/04
+
+File's Purpose - Creates the Game, Board, and Square components, and holds the logic for checking the winners along the grid, history of board states, and more.
+
+The Square components determine what should display on the button given a value. The Board component provide the templates for the 2D grid of Square components 
+and pass values into their props, holds the handleClick method and calls on the calculateWinner methods to check if there is a winner, and more.
+
+The Game component provides template for boarder game layout which includes the list items of player moves, a set of buttons and inputs to set
+the board size, and board itself. It holds some important variables and methods such as handlePlay, updateBoardSize methods, and pass values into props of the board component.
+It is exported out and rendered by React.
+
+Written in JS/JSX. For more information on the extended portions of code, read the comments below. 
+*/
+
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faO, faX } from '@fortawesome/free-solid-svg-icons';
@@ -53,10 +65,12 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
-      {/* Create a dynamic board template based on size */}
       <div className="status">{status}</div>
-      {/*  Figuring out how to generate loops in JSX
-      https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
+      {/* Creates a dynamic board template based on size */}
+      {/* Generates 2D grid of squares components by calling the nested map methods within the 2d square arrays passed into the Board component prop.*/}
+      {/* Nested maps essentially returns an nested array of JSX elements that Babel can render, but it requires unique keys */}
+      {/* Source for figuring out how to generate loops in: JSX https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */}
+      {/* Source to understand JS Array's map method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
       <div>
         {
           squares.map((nestedArray, rowIndex) => {

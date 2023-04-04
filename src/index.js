@@ -1,6 +1,10 @@
-// Khiem Nguyen - CIS 658
-// File's Purpose - The file injects and renders the app component in the element w/ the root id in the index.html where it can be viewed in the browser
-// Date - 2023/31/03
+/* 
+Khiem Nguyen - CIS 658
+Date - 2023/31/03
+
+File's Purpose - The file injects and renders the app component in the element w/ the root id in the index.html where it can be viewed in the browser. 
+Hybrid code from npx project generation and code paste in from the start of the tutorial.
+*/
 
 import React, { StrictMode } from 'react';
 import { createRoot } from "react-dom/client";
