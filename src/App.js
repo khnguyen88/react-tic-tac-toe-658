@@ -326,5 +326,10 @@ function calculateWinner(squares) {
     }
   }
 
+  // Edge case handling - Player set board size equal to 1, lol.
+  if (squares.length === 1 && squares[0].length === 1) {
+    return squares[0][0];
+  }
+
   return null;
 }
