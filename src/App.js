@@ -164,7 +164,7 @@ export default function Game() {
             <form>
               <label class="label-text" for="rowColSize">Set Row & Col Size:</label><br/>
               {/* Dynamic number input that binds it's values to rowColSize and checks to see if values entered in is numeric, if so call the updateBoardSize function and pass in the target value as a number, pass in current rowColSize value */}
-              <input name='rowColSize' pattern="[0-9]*" type='number' value={rowColSize} onChange={e => { updateBoardSize(e.target.validity.valid ? e.target.valueAsNumber : rowColSize);  }} />
+              <input name='rowColSize' pattern="[0-9]*" type='number' value={rowColSize} min="1" onChange={e => { updateBoardSize(e.target.validity.valid ? e.target.valueAsNumber : rowColSize);  }} required/>
             </form>
           </div>
           <br />
